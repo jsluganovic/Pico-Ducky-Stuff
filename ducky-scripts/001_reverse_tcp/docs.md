@@ -10,4 +10,4 @@
 ## Some stuff that could be important when building python files to exe with pyInstaller
 - USAGE: (pyInstaller should be in PATH): **pyinstaller --onefile --key 12345 "path\to\script.py"**
 - add --noconsole and --nowindowed. When run payload will not be shown on the victims pc.
-- for more info about pyInstaller follow [this]("https://pyinstaller.org/en/stable/usage.html") link.
+- for more info about pyInstaller follow this [link](https://pyinstaller.org/en/stable/usage.html).
