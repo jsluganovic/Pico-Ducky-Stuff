@@ -16,4 +16,4 @@
 ## Payload
 - Payload is located at script dir (e.g. 001_reverse_tcp/debug/build/)
 - Depending on how the payload was built it will have various folders
-- Normally it should be able to be send as a single-file payload out of the **dist** folder
+- Normally it should be able to be sent as a single-file payload out of the **dist** folder
