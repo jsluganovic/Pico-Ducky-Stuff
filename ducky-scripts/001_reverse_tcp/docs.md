@@ -1,4 +1,4 @@
-### *reverse TCP connection*
+### *Reverse TCP connection*
 
 ## How does this reverse tcp connection work?
 - A Raspberry Pico, which was modified, is plugged into a victim pc
