@@ -6,3 +6,8 @@
 - Powershell then downloads another payload (the tcp client) and runs it
 - (Not tested yet) The program should directly run in powershell, this means that the actual file never touches the victims pc
 - ^ This should also prevent windows AV of noticing smth odd
+
+# Some stuff that could be important when building python files to exe with pyInstaller
+- usage (pyInstaller should be in PATH): **pyinstaller --onefile --key 12345 "path\to\script.py" 
+- add --noconsole and --nowindowed. Payload will not be shown on the victims pc. 
+- for more info about pyInstaller follow [this]("https://pyinstaller.org/en/stable/usage.html") link.
