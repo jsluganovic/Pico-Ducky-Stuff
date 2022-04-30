@@ -2,7 +2,7 @@ import socket
 
 
 # declare host ip and port 
-SHOST = "192.168.2.153"
+SHOST = "172.31.176.1"
 SPORT = 7123
 
 # Create socket and start listening
